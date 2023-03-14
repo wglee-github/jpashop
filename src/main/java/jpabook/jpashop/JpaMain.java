@@ -27,10 +27,6 @@ public class JpaMain {
 		try {
 			
 			
-			Order order = new Order();
-			order.addOrderItem(new OrderItem());
-			
-			
 			// 트랜잭션 종료
 			tx.commit();
 		} catch (Exception e) {

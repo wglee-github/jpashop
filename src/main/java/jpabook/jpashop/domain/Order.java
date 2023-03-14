@@ -13,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,6 +23,11 @@ public class Order {
 	@Id @GeneratedValue
 	@Column(name = "ORDER_ID")
 	private Long id;
+	
+	private LocalDateTime orderDate;
+	
+	@Enumerated(EnumType.STRING)
+	private OrderStatus status;
 	
 	/**
 	 * Member 테이블의 PK를 FK로 지정한 컬럼. 
@@ -38,16 +44,19 @@ public class Order {
 	private Member member;
 	
 	/**
+	 * delivery 의 PK를 order에 FK로 설정  
+	 */
+	@OneToOne
+	@JoinColumn(name = "DELIVERY_ID")
+	private Delivery delivery;
+	
+	/**
 	 * 연관관계의 주인 필드를 mappedBy에 지정해 준다.
 	 */
 	@OneToMany(mappedBy = "order")
 	private List<OrderItem> orderItems = new ArrayList<OrderItem>();
 	
-	private LocalDateTime orderDate;
 	
-	@Enumerated(EnumType.STRING)
-	private OrderStatus status;
-
 	/**
 	 * 양방향 편의 메소드
 	 * JPQL을 작성할 때 필요한 상황이 생긴다.
@@ -96,6 +105,14 @@ public class Order {
 
 	public void setMember(Member member) {
 		this.member = member;
+	}
+
+	public Delivery getDelivery() {
+		return delivery;
+	}
+
+	public void setDelivery(Delivery delivery) {
+		this.delivery = delivery;
 	}
 
 }
