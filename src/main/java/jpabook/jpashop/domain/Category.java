@@ -14,7 +14,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Category {
+public class Category extends BaseEntity {
 	
 	@Id @GeneratedValue
 	@Column(name = "CATEGORY_ID")
@@ -29,6 +29,9 @@ public class Category {
 	@OneToMany(mappedBy = "parent")
 	private List<Category> child = new ArrayList<Category>();
 	
+	/**
+	 * N:M 관계 시 중간 테이블 생성
+	 */
 	@ManyToMany
 	@JoinTable(name = "CATEGORY_ITEM"
 			, joinColumns = @JoinColumn(name = "CATEGORY_ID")
