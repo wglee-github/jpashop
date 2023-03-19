@@ -27,11 +27,11 @@ public class JpaMain {
 		
 		try {
 			
-			Book book = new Book();
-			book.setName("JPA");
-			book.setAuthor("user");
-			
-			em.persist(book);
+//			Book book = new Book();
+//			book.setName("JPA");
+//			book.setAuthor("user");
+//			
+//			em.persist(book);
 			
 			// 트랜잭션 종료
 			tx.commit();
